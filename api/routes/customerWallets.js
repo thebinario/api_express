@@ -2,6 +2,8 @@ module.exports = app => {
     const controller = app.controllers.customerWallets;
 
 
-    app.get('/api/v1/customer-wallets', controller.listCustomerWallets)
+    app.route('/api/v1/customer-wallets')
+        .get(controller.listCustomerWallets)
+        .post(controller.saveCustomerWallets);
 
 }
