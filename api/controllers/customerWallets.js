@@ -79,18 +79,11 @@ module.exports = app => {
         const { byName } = req.params;
 
         const filterList = (data, query) => {
-            // return data.filter(item => { String(item.name).toLowerCase().search(String(query).toLowerCase()) !== -1 });
-            return data.filter((d, i) => String(d.name).toLowerCase().includes(String(query).toLowerCase()));
+            return data.filter((d, i) => d.name.toLowerCase().includes(query.toLowerCase()));
         };
 
         const customerWalletName = filterList(customerWalletsMock.data, byName);
-        console.log('>>', customerWalletName)
-        if (!customerWalletName) {
-            return res.status(404).json({
-                error: 'Customer not found',
-            });
-        }
-
+    
         res.status(200).json({
             data: customerWalletName
         });
