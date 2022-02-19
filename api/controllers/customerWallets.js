@@ -24,7 +24,27 @@ module.exports = app => {
 
         res.status(201).json(customerWalletsMock)
 
+    };
+
+    controller.removeCustomerWallets = (req, res) => {
+        const customerWallet = customerWalletsMock.data.find(customerWallet => customerWallet.id === req.params.customerId);
+
+        if (!customerWallet) {
+            return res.status(404).json({
+                error: 'Customer not found',
+            });
+        }
+
+        customerWalletsMock.data = customerWalletsMock.data.filter(customerWallet => customerWallet.id !== req.params.customerId);
+
+        res.status(200).json({
+            message: 'Customer removed successfully',
+            success: true,
+            data: customerWalletsMock
+        });
     }
+
+
 
     return controller;
 }
