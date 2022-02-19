@@ -44,6 +44,35 @@ module.exports = app => {
         });
     }
 
+    controller.updateCustomerWallets = (req, res) => {
+        const { customerId } = req.params;
+        const { name, birthDate, cellphone, phone, email, occupation, state } = req.body;
+
+        const customerWallet = customerWalletsMock.data.find(customerWallet => customerWallet.id === customerId);
+        
+        if (!customerWallet) {
+            return res.status(404).json({
+                error: 'Customer not found',
+            });
+        }
+        
+        customerWallet.name = name;
+        customerWallet.birthDate = birthDate;
+        customerWallet.cellphone = cellphone;
+        customerWallet.phone = phone;
+        customerWallet.email = email;
+        customerWallet.occupation = occupation;
+        customerWallet.state = state;
+
+        res.status(200).json({
+            message: 'Customer updated successfully',
+            success: true,
+            data: customerWallet
+        });
+
+
+    }
+
 
 
     return controller;
