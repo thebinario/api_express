@@ -49,13 +49,13 @@ module.exports = app => {
         const { name, birthDate, cellphone, phone, email, occupation, state } = req.body;
 
         const customerWallet = customerWalletsMock.data.find(customerWallet => customerWallet.id === customerId);
-        
+
         if (!customerWallet) {
             return res.status(404).json({
                 error: 'Customer not found',
             });
         }
-        
+
         customerWallet.name = name;
         customerWallet.birthDate = birthDate;
         customerWallet.cellphone = cellphone;
@@ -74,6 +74,29 @@ module.exports = app => {
     }
 
 
+
+    controller.getByName = (req, res) => {
+        const { byName } = req.params;
+
+        const filterList = (data, query) => {
+            // return data.filter(item => { String(item.name).toLowerCase().search(String(query).toLowerCase()) !== -1 });
+            return data.filter((d, i) => String(d.name).toLowerCase().includes(String(query).toLowerCase()));
+        };
+
+        const customerWalletName = filterList(customerWalletsMock.data, byName);
+        console.log('>>', customerWalletName)
+        if (!customerWalletName) {
+            return res.status(404).json({
+                error: 'Customer not found',
+            });
+        }
+
+        res.status(200).json({
+            data: customerWalletName
+        });
+
+
+    };
 
     return controller;
 }

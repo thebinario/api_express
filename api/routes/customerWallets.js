@@ -10,4 +10,7 @@ module.exports = app => {
         .delete(controller.removeCustomerWallets)
         .put(controller.updateCustomerWallets)
 
+    app.route('/api/v1/customer-wallets/by-name/:byName')
+        .get(controller.getByName)
+
 }
