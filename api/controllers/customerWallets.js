@@ -78,12 +78,16 @@ module.exports = app => {
     controller.getByName = (req, res) => {
         const { byName } = req.params;
 
-        const filterList = (data, query) => {
-            return data.filter((d, i) => d.name.toLowerCase().includes(query.toLowerCase()));
+        const filterList = (arr, name) => {
+            return arr.filter(user => user.name
+                .toLowerCase()
+                .includes(
+                    name.toLowerCase()
+                ));
         };
 
         const customerWalletName = filterList(customerWalletsMock.data, byName);
-    
+
         res.status(200).json({
             data: customerWalletName
         });
