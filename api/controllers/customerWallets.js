@@ -73,8 +73,6 @@ module.exports = app => {
 
     }
 
-
-
     controller.getByName = (req, res) => {
         const { byName } = req.params;
 
