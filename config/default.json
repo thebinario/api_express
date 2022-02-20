@@ -1,5 +1,12 @@
 {
     "server": {
         "port": 8080
+    },
+    "database": {
+        "user": "postgres",
+        "host": "localhost",
+        "database": "issue_tracker",
+        "password": "123456",
+        "port": 5432
     }
 }
